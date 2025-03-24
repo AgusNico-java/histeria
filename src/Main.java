@@ -2,9 +2,9 @@ import Controller.BoardController;
 import Controller.LevelController;
 import Model.BoardModel;
 import Model.LevelModel;
-import Observer.Observer;
 import View.BoardView;
 import View.LevelView;
+import View.WinView;
 
 import javax.swing.*;
 
@@ -43,6 +43,8 @@ public class Main {
             // 5. Mostrar la ventana
             boardView.setVisible(true);
 
+            WinView winView = new WinView();
+            boardModel.addObserver(winView);
         });
     }
 }
