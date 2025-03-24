@@ -1,4 +1,7 @@
-import View.BoardView;
+import Controller.LevelController;
+import Model.LevelModel;
+import Observer.Observer;
+import View.LevelView;
 
 import javax.swing.*;
 
@@ -8,19 +11,19 @@ public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             // 1. Crear el modelo
-            //Calculator model = new Calculator();
+            LevelModel levelModel = new LevelModel();
 
             // 2. Crear el controlador
-            //CalculatorController controller = new CalculatorController(model);
+            LevelController levelController = new LevelController(levelModel);
 
             // 3. Crear la vista, inyectando el controlador
-            BoardView view = new BoardView(controller);
+            LevelView levelView = new LevelView(levelController);
 
             // 4. Registrar la vista como observer en el modelo
-            //model.addObserver(view);
+            levelModel.addObserver(levelView);
 
             // 5. Mostrar la ventana
-            view.setVisible(true);
+            levelView.setVisible(true);
         });
     }
 }
