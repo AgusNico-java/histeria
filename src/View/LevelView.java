@@ -19,7 +19,7 @@ public class LevelView extends JFrame implements Observer {
         this.levelController = levelController;
 
         // Configurar el JFrame
-        setTitle("Hysteria Level Selector");
+        setTitle("Hysteria");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 400);
         setLocationRelativeTo(null);

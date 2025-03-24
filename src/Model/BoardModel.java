@@ -10,8 +10,6 @@ import java.util.Random;
 public class BoardModel {
     private Cell[][] grid;
     private int gridCells = 5;
-    private int columns = gridCells ;
-    private int rows = gridCells ;
     private int gridSize = 1024 ;//TODO: TAMAÑO VENTANA DEL FORM???
     private Color[] possibleColors = {Color.RED, Color.BLUE, Color.GREEN,
             Color.YELLOW, Color.CYAN, Color.ORANGE};
@@ -23,7 +21,7 @@ public class BoardModel {
         this.gridCells = gridCells;
         grid = new Cell[gridCells][gridCells ];
 
-        int buttonSize = gridSize/columns;
+        int buttonSize = gridSize/gridCells;
 
         //TODO: REVISAR COMO CALCULAR EL TAMAÑANO EN BASE AL TAMAÑA DE LA GRILLA
         for (int i = 0; i < gridCells; i++) {
@@ -33,6 +31,9 @@ public class BoardModel {
         }
     }
 
+    public int getGridCells(){
+        return gridCells;
+    }
     //TODO: EL OBSERVADOR PASA LA CELDA CLICKEADA > SE COMPARA ARRIBA, ABAJO,DER E IZQ
     public Boolean compare(Cell cell){
         //ACTUALIZA CELDA
@@ -76,7 +77,7 @@ public class BoardModel {
             int neighborRow = row + direction[0];
             int neighborCol = column + direction[1];
 
-            if (neighborRow >= 0 && neighborRow < rows && neighborCol >= 0 && neighborCol < columns) {
+            if (neighborRow >= 0 && neighborRow < gridCells && neighborCol >= 0 && neighborCol < gridCells) {
                 Cell neighborCell = getCell(neighborRow, neighborCol);
 
                 if (cell.compareColor(neighborCell)) {
