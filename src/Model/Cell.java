@@ -5,15 +5,16 @@ import java.awt.*;
 public class Cell {
     private Color color;
     private int row;
-    private int Column;
+    private int column;
     private int size ;
 
 
     //TODO: DEBERIA PONER UN COLOR POR DEFECTO? O ESO YA ES LOGICA?
     public Cell(int row, int column, int size) {
+        //TODO: VALIDAR QUE NO SE PASE MENOR A CERO
         this.color = Color.gray;
         this.row = row;
-        this.Column = column;
+        this.column = column;
     }
 
     public Color getColor() {
@@ -29,11 +30,13 @@ public class Cell {
     }
 
     public int getColumn() {
-        return Column;
+        return this.column;
     }
 
-    public boolean compareColor(Cell cell){
-        return this.color == cell.color;
+    public boolean compareColor(Cell cell) {
+        return this.color.equals(cell.color);
     }
+
+
 
 }
