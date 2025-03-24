@@ -29,6 +29,9 @@ public class WinView extends JFrame implements Observer {
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.CENTER;
         getContentPane().add(startButton, gbc);
+
+        //TODO: Descomentar para probar, esto l ohace el método notificar
+        //setVisible(true);
     }
     @Override
     public void notificar() {
