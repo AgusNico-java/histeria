@@ -9,7 +9,7 @@ public class WinView extends JFrame implements Observer {
     private JButton startButton;
 
     public WinView() {
-        // Configurar el JFrame
+
         setTitle("Hysteria");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 400);
@@ -30,7 +30,7 @@ public class WinView extends JFrame implements Observer {
         gbc.fill = GridBagConstraints.CENTER;
         getContentPane().add(startButton, gbc);
 
-        //TODO: Descomentar para probar, esto l ohace el método notificar
+        //TODO: Descomentar para probar, esto lo hace el método notificar
         //setVisible(true);
     }
     @Override
