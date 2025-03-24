@@ -14,10 +14,6 @@ public class BoardModel implements Board{
             Color.YELLOW, Color.CYAN, Color.ORANGE};
     private List<Observer> observers;
 
-    //TODO: GENERAR FUNCION
-    public Color getRandomColor(){
-        return Color.RED;
-    }
 
     public BoardModel(int gridCells) {
         observers = new ArrayList<Observer>();
@@ -38,7 +34,8 @@ public class BoardModel implements Board{
     }
 
     //TODO: EL OBSERVADOR PASA LA CELDA CLICKEADA > SE COMPARA ARRIBA, ABAJO,DER E IZQ
-    public Boolean updateColorsAroundCell(Cell cell){
+    public Boolean updateColorsAroundCell(int row, int column){
+        Cell cell = getCell(row, column);
         Boolean updateUp = updateColor(cell, cell.getRow() - 1, cell.getColumn());
         Boolean updateDown = updateColor(cell, cell.getRow() + 1, cell.getColumn());
         Boolean updateLeft = updateColor(cell, cell.getRow(), cell.getColumn() - 1);
@@ -47,15 +44,16 @@ public class BoardModel implements Board{
         return updateUp || updateDown || updateLeft || updateRight;
     }
 
-    public void updateCellColor(Cell cell, Color color){
+    public void updateCellColor(int row, int column, Color color){
+        Cell cell = getCell(row, column);
         cell.setColor(color);
     }
 
-    public Cell getCell(int row, int column) {
+    private Cell getCell(int row, int column) {
         return grid[row][column];
     }
 
-    public void updateCellColor(int row, int column, Color color) {
+    public void generateCellColor(int row, int column) {
         Color newColor = possibleColors[new Random().nextInt(6)];
         grid[row][column].setColor(newColor);
 
