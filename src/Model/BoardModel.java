@@ -39,8 +39,8 @@ public class BoardModel {
         return updateUp || updateDown || updateLeft || updateRight;
     }
 
-    public void updateCellColor(Cell cell){
-        cell.setColor(Color.GRAY);
+    public void updateCellColor(Cell cell, Color color){
+        cell.setColor(color);
     }
 
     private Boolean updateColor(Cell cell, int row, int column){
@@ -55,5 +55,9 @@ public class BoardModel {
 
     public void addObserver(Observer observer) {
         observers.add(observer);
+    }
+
+    public Cell getCell(int row, int column) {
+        return grid[row][column];
     }
 }
