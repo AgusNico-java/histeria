@@ -8,22 +8,22 @@ import java.util.List;
 
 public class BoardModel implements Board{
     private Cell[][] grid;
-    private int columns = 5;
+    private int gridCells = 5;
     private int gridSize = 1024 ;//TODO: TAMAÑO VENTANA DEL FORM???
     private Color[] possibleColors = {Color.RED, Color.BLUE, Color.GREEN,
             Color.YELLOW, Color.CYAN, Color.ORANGE};
     private List<Observer> observers;
 
 
-    public BoardModel(int columns) {
+    public BoardModel(int gridCells) {
         observers = new ArrayList<Observer>();
-        grid = new Cell[columns][columns];
-        this.columns = columns;
-        int buttonSize = gridSize/columns;
+        grid = new Cell[gridCells][gridCells];
+        this.gridCells = gridCells;
+        int buttonSize = gridSize/gridCells;
 
         //TODO: REVISAR COMO CALCULAR EL TAMAÑANO EN BASE AL TAMAÑA DE LA GRILLA
-        for (int i = 0; i < columns; i++) {
-            for (int j = 0; j < columns; j++) {
+        for (int i = 0; i < gridCells; i++) {
+            for (int j = 0; j < gridCells; j++) {
                 grid[i][j] = new Cell(i, j, buttonSize);
             }
         }
@@ -52,7 +52,7 @@ public class BoardModel implements Board{
     }
 
     private Boolean updateColor(Cell cell, int row, int column){
-        if (row >= 0 && row < this.columns && column >= 0 && column < this.columns) {
+        if (row >= 0 && row < this.gridCells && column >= 0 && column < this.gridCells) {
             if (cell.compareColor(grid[row][column])){
                 grid[row][column].setColor(Color.GRAY);
                 return true;
