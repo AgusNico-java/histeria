@@ -4,9 +4,9 @@ import java.awt.*;
 
 public interface Board {
 
-    public Boolean updateColorsAroundCell(Cell cell);
-    Cell getCell(int row, int column);
-    void updateCellColor(Cell cell, Color color);
     int getGridCells();
-    Color getRandomColor();
+    Boolean updateColorsAroundCell(int row, int column);
+    void updateCellColor(int row, int column, Color color);
+    void generateCellColor(int row, int column);
+
 }

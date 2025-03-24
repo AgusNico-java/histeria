@@ -19,13 +19,10 @@ public class BoardController {
 
     public void updateBoardOnClick(int row, int column){
         System.out.println(row + " " + column);
-        //TODO: Generar un color random
-        Color color = boardModel.getRandomColor();
-        Cell cell = boardModel.getCell(row, column);
-        boardModel.updateCellColor(cell, color);
-        Boolean cleanCellColor = boardModel.updateColorsAroundCell(cell);
+        boardModel.generateCellColor(row, column);
+        Boolean cleanCellColor = boardModel.updateColorsAroundCell(row, column);
         if (cleanCellColor) {
-            boardModel.updateCellColor(cell, Color.GRAY);
+            boardModel.updateCellColor(row, column, Color.GRAY);
         }
     }
 }
