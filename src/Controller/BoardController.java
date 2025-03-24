@@ -8,4 +8,5 @@ public class BoardController {
     public BoardController(BoardModel boardModel) {
         this.boardModel = boardModel;
     }
+
 }
