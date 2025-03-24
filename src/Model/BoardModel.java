@@ -1,6 +1,6 @@
 package Model;
 
-import Observer.Observer;
+import Observers.Observer;
 
 import java.awt.*;
 import java.util.ArrayList;

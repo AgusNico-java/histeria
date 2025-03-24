@@ -1,19 +1,19 @@
 package View;
 
 import Controller.LevelController;
-import Model.LevelModel;
 
 import javax.swing.*;
 import java.awt.*;
-import Observer.Observer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import Observers.Observer;
 
 public class LevelView extends JFrame implements Observer {
-    private JButton button1;
     private JPanel panel1;
-    private JButton jugarButton;
-    private JComboBox comboBox1;
+    private JButton playButton;
+    private JComboBox difficultySelector;
     private LevelController levelController;
-
 
     public LevelView(LevelController levelController) {
         this.levelController = levelController;
@@ -47,44 +47,18 @@ public class LevelView extends JFrame implements Observer {
     private void $$$setupUI$$$() {
         panel1 = new JPanel();
         panel1.setLayout(new CardLayout(0, 0));
-        button1 = new JButton();
-        button1.setText("Button");
-        panel1.add(button1, "Card1");
         final JPanel panel2 = new JPanel();
         panel2.setLayout(new GridBagLayout());
         panel1.add(panel2, "Card2");
         final JPanel spacer1 = new JPanel();
-        GridBagConstraints gbc;
-        gbc = new GridBagConstraints();
+
+        GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 2;
         gbc.gridy = 3;
         gbc.anchor = GridBagConstraints.NORTH;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel2.add(spacer1, gbc);
-        final JLabel label1 = new JLabel();
-        label1.setText("Seleccione un nivel:");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel2.add(label1, gbc);
-        jugarButton = new JButton();
-        jugarButton.setText("Jugar");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 1;
-        gbc.gridy = 4;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel2.add(jugarButton, gbc);
-        comboBox1 = new JComboBox();
-        final DefaultComboBoxModel defaultComboBoxModel1 = new DefaultComboBoxModel();
-        defaultComboBoxModel1.addElement("Facil");
-        defaultComboBoxModel1.addElement("Medio");
-        defaultComboBoxModel1.addElement("Dificil");
-        comboBox1.setModel(defaultComboBoxModel1);
-        gbc = new GridBagConstraints();
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        panel2.add(comboBox1, gbc);
+
         final JLabel label2 = new JLabel();
         label2.setText("Bienvenido a Histeria!");
         gbc = new GridBagConstraints();
@@ -92,6 +66,42 @@ public class LevelView extends JFrame implements Observer {
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
         panel2.add(label2, gbc);
+
+        final JLabel label1 = new JLabel();
+        label1.setText("Seleccione un nivel:");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.WEST;
+        panel2.add(label1, gbc);
+
+        difficultySelector = new JComboBox();
+        final DefaultComboBoxModel defaultComboBoxModel1 = new DefaultComboBoxModel();
+        defaultComboBoxModel1.addElement("FACIL");
+        defaultComboBoxModel1.addElement("MEDIO");
+        defaultComboBoxModel1.addElement("DIFICIL");
+        difficultySelector.setModel(defaultComboBoxModel1);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        panel2.add(difficultySelector, gbc);
+
+        playButton = new JButton();
+        playButton.setText("Jugar");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        playButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                levelController.establecerDificultad(difficultySelector.getSelectedItem().toString());
+                dispose();
+            }
+        });
+
+        panel2.add(playButton, gbc);
+
     }
 
     /**
@@ -101,4 +111,7 @@ public class LevelView extends JFrame implements Observer {
         return panel1;
     }
 
+    @Override
+    public void notificar() {
+    }
 }
