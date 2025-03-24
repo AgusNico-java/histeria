@@ -30,12 +30,27 @@ public class BoardModel {
     }
 
     //TODO: EL OBSERVADOR PASA LA CELDA CLICKEADA > SE COMPARA ARRIBA, ABAJO,DER E IZQ
-    public Boolean compare(Cell cell){
-        //ACTUALIZA CELDA
+    public Boolean updateColorsAroundCell(Cell cell){
+        Boolean updateUp = updateColor(cell, cell.getRow() - 1, cell.getColumn());
+        Boolean updateDown = updateColor(cell, cell.getRow() + 1, cell.getColumn());
+        Boolean updateLeft = updateColor(cell, cell.getRow(), cell.getColumn() - 1);
+        Boolean updateRight = updateColor(cell, cell.getRow() , cell.getColumn() + 1);
 
-        //
-        return  false;
+        return updateUp || updateDown || updateLeft || updateRight;
+    }
 
+    public void updateCellColor(Cell cell){
+        cell.setColor(Color.GRAY);
+    }
+
+    private Boolean updateColor(Cell cell, int row, int column){
+        if (row >= 0 && row < this.columns && column >= 0 && column < this.columns) {
+            if (cell.compareColor(grid[row][column])){
+                grid[row][column].setColor(Color.GRAY);
+                return true;
+            }
+        }
+        return false;
     }
 
     public void addObserver(Observer observer) {
