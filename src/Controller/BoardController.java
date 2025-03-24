@@ -1,14 +1,14 @@
 package Controller;
 
-import Model.BoardModel;
+import Model.Board;
 import Model.Cell;
 
 import java.awt.*;
 
 public class BoardController {
-    private BoardModel boardModel;
+    private Board boardModel;
 
-    public BoardController(BoardModel boardModel) {
+    public BoardController(Board boardModel) {
         this.boardModel = boardModel;
     }
 

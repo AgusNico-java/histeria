@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BoardModel {
+public class BoardModel implements Board{
     private Cell[][] grid;
     private int columns = 5;
     private int gridSize = 1024 ;//TODO: TAMAÑO VENTANA DEL FORM???
@@ -43,6 +43,14 @@ public class BoardModel {
         cell.setColor(color);
     }
 
+    public Cell getCell(int row, int column) {
+        return grid[row][column];
+    }
+
+    public void addObserver(Observer observer) {
+        observers.add(observer);
+    }
+
     private Boolean updateColor(Cell cell, int row, int column){
         if (row >= 0 && row < this.columns && column >= 0 && column < this.columns) {
             if (cell.compareColor(grid[row][column])){
@@ -51,13 +59,5 @@ public class BoardModel {
             }
         }
         return false;
-    }
-
-    public void addObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    public Cell getCell(int row, int column) {
-        return grid[row][column];
     }
 }
