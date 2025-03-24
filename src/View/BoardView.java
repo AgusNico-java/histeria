@@ -28,7 +28,7 @@ public class BoardView extends JFrame implements Observer {
                 gridButtons[i][j] = new JButton();
                 gridButtons[i][j].setBackground(Color.WHITE);
                 int x = i, y = j;
-                gridButtons[i][j].addActionListener(e -> boardController.cellSellected(x,y));
+                gridButtons[i][j].addActionListener(e -> boardController.updateBoardOnClick(x,y));
                 add(gridButtons[i][j]);
             }
         }

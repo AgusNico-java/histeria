@@ -12,19 +12,15 @@ public class BoardController {
         this.boardModel = boardModel;
     }
 
-    //TODO: MANEJAR LOS EVENTOS DE CLIC
-    public void cellSellected(int row, int column) {
-        System.out.println(row + " " + column);
-
-    }
 
     public int getGridCells(){
         return boardModel.getGridCells();
     }
 
     public void updateBoardOnClick(int row, int column){
+        System.out.println(row + " " + column);
         //TODO: Generar un color random
-        Color color = Color.RED;
+        Color color = boardModel.getRandomColor();
         Cell cell = boardModel.getCell(row, column);
         boardModel.updateCellColor(cell, color);
         Boolean cleanCellColor = boardModel.updateColorsAroundCell(cell);

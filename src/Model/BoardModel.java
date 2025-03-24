@@ -14,6 +14,10 @@ public class BoardModel implements Board{
             Color.YELLOW, Color.CYAN, Color.ORANGE};
     private List<Observer> observers;
 
+    //TODO: GENERAR FUNCION
+    public Color getRandomColor(){
+        return Color.RED;
+    }
 
     public BoardModel(int gridCells) {
         observers = new ArrayList<Observer>();
@@ -24,7 +28,7 @@ public class BoardModel implements Board{
         //TODO: REVISAR COMO CALCULAR EL TAMAÑANO EN BASE AL TAMAÑA DE LA GRILLA
         for (int i = 0; i < gridCells; i++) {
             for (int j = 0; j < gridCells; j++) {
-                grid[i][j] = new Cell(i, j, buttonSize);
+                grid[i][j] = new Cell(i, j);
             }
         }
     }
@@ -32,6 +36,7 @@ public class BoardModel implements Board{
     public int getGridCells(){
         return gridCells;
     }
+
     //TODO: EL OBSERVADOR PASA LA CELDA CLICKEADA > SE COMPARA ARRIBA, ABAJO,DER E IZQ
     public Boolean updateColorsAroundCell(Cell cell){
         Boolean updateUp = updateColor(cell, cell.getRow() - 1, cell.getColumn());
@@ -44,10 +49,6 @@ public class BoardModel implements Board{
 
     public void updateCellColor(Cell cell, Color color){
         cell.setColor(color);
-    }
-
-    public Cell getCell(int row, int column) {
-        return grid[row][column];
     }
 
     public Cell getCell(int row, int column) {
