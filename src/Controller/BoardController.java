@@ -1,17 +1,14 @@
 package Controller;
 
 import Model.Board;
-import Model.Cell;
-
 import java.awt.*;
 
 public class BoardController {
-    private Board boardModel;
+    private final Board boardModel;
 
     public BoardController(Board boardModel) {
         this.boardModel = boardModel;
     }
-
 
     public int getGridCells(){
         return boardModel.getGridCells();

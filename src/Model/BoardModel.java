@@ -13,6 +13,7 @@ public class BoardModel implements Board{
     private Color[] possibleColors = {Color.RED, Color.BLUE, Color.GREEN,
             Color.YELLOW, Color.CYAN, Color.ORANGE};
     private List<Observer> observers;
+    private int totalGrayCells;
 
 
     public BoardModel(int gridCells) {
@@ -20,20 +21,20 @@ public class BoardModel implements Board{
         this.gridCells = gridCells;
         grid = new Cell[gridCells][gridCells];
 
-
-        //TODO: REVISAR COMO CALCULAR EL TAMAÑANO EN BASE AL TAMAÑA DE LA GRILLA
+        //Inicializa los valores de los atributos fila y columna de cada celda
         for (int i = 0; i < gridCells; i++) {
             for (int j = 0; j < gridCells; j++) {
                 grid[i][j] = new Cell(i, j);
             }
         }
+
+        this.totalGrayCells = gridCells * gridCells;
     }
 
     public int getGridCells(){
         return gridCells;
     }
 
-    //TODO: EL OBSERVADOR PASA LA CELDA CLICKEADA > SE COMPARA ARRIBA, ABAJO,DER E IZQ
     public Boolean updateColorsAroundCell(int row, int column){
         Cell cell = getCell(row, column);
         Boolean updateUp = updateColor(cell, cell.getRow() - 1, cell.getColumn());
@@ -46,16 +47,23 @@ public class BoardModel implements Board{
 
     public void updateCellColor(int row, int column, Color color){
         Cell cell = getCell(row, column);
-        cell.setColor(color);
-    }
 
-    private Cell getCell(int row, int column) {
-        return grid[row][column];
+
+        if (color.equals(Color.GRAY)) {
+            this.totalGrayCells += 1;
+        }
+        if (cell.getColor().equals(Color.GRAY)){
+            this.totalGrayCells -= 1;
+        }
+        System.out.println("Total gray cells: " + this.totalGrayCells);
+        cell.setColor(color);
+        checkWin();
     }
 
     public void generateCellColor(int row, int column) {
         Color newColor = possibleColors[new Random().nextInt(6)];
-        grid[row][column].setColor(newColor);
+        updateCellColor(row,column, newColor);
+        System.out.println("Color selected: " + newColor);
 
         // Verificar vecinos
         //if (hayConflicto(x, y)) {
@@ -66,7 +74,7 @@ public class BoardModel implements Board{
         //notifyObservers();     // Notifica a la vista
 
     }
-
+    //TODO: revisar uso del método
     public boolean hasSameColorNeighbor(Cell cell) {
         int row = cell.getRow();
         int column = cell.getColumn();
@@ -95,8 +103,6 @@ public class BoardModel implements Board{
         return false;  // Si ninguna vecina tiene el mismo color
     }
 
-
-
     public void addObserver(Observer observer) {
         observers.add(observer);
     }
@@ -104,10 +110,21 @@ public class BoardModel implements Board{
     private Boolean updateColor(Cell cell, int row, int column){
         if (row >= 0 && row < this.gridCells && column >= 0 && column < this.gridCells) {
             if (cell.compareColor(grid[row][column])){
-                grid[row][column].setColor(Color.GRAY);
+                updateCellColor(row, column, Color.GRAY);
                 return true;
             }
         }
         return false;
+    }
+
+    private Cell getCell(int row, int column) {
+        return grid[row][column];
+    }
+    
+    private void checkWin(){
+        if (totalGrayCells == 0){
+            System.out.println("Ganaste!");
+            //TODO: Observer notify
+        }
     }
 }
