@@ -1,16 +1,24 @@
 package Model.values;
 
+import Utils.GameConfig;
+
 import java.util.Arrays;
 
 public enum Level {
-    FACIL("Facil"),
-    MEDIO("Medio"),
-    DIFICIL("Dificil");
+    FACIL("Facil", GameConfig.EASY),
+    MEDIO("Medio", GameConfig.MEDIUM),
+    DIFICIL("Dificil", GameConfig.HARD);
 
     private final String value;
+    private final int size;
 
-    Level(String value) {
+    Level(String value, int size) {
         this.value = value;
+        this.size = size;
+    }
+
+    public int getGridSize() {
+        return size;
     }
 
     public String getValue() {

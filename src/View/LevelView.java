@@ -52,13 +52,11 @@ public class LevelView extends BaseView {
         gbc.gridwidth = 2;
         add(welcomeMessage, gbc);
 
-        gbc.gridwidth = 1;
-
         selectionMessage = new JLabel(Texts.LEVEL_SELECTION);
         selectionMessage.setFont(new Font("Arial", Font.PLAIN, 18));
-
         gbc.gridx = 0;
         gbc.gridy = 1;
+        gbc.gridwidth = 1;
         add(selectionMessage, gbc);
 
         levelSelection = new JComboBox<>(boardController.getAvailableLevels());
@@ -66,6 +64,7 @@ public class LevelView extends BaseView {
         gbc.insets = new Insets(20, 0, 20, 40);
         gbc.gridx = 1;
         gbc.gridy = 1;
+        gbc.gridwidth = 1;
         add(levelSelection, gbc);
 
         startGameButton = new JButton(Texts.PLAY);
@@ -74,6 +73,7 @@ public class LevelView extends BaseView {
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.CENTER;
         add(startGameButton, gbc);
     }
 

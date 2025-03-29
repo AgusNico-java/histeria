@@ -2,8 +2,8 @@ package Controller;
 
 import Model.BoardModel;
 import Model.values.Level;
+
 import java.awt.Color;
-import java.util.Arrays;
 
 public class BoardController {
     private BoardModel boardModel;
@@ -18,11 +18,7 @@ public class BoardController {
 
     public void startGame(String levelText) {
         Level level = Level.fromString(levelText);
-        switch (level) {
-            case FACIL -> boardModel.initBoard(4);
-            case MEDIO -> boardModel.initBoard(6);
-            case DIFICIL -> boardModel.initBoard(8);
-        }
+        boardModel.initBoard(level.getGridSize());
     }
 
     public void updateBoardOnClick(int row, int column){
@@ -49,5 +45,9 @@ public class BoardController {
 
     public String[] getAvailableLevels() {
         return Level.getLabels();
+    }
+
+    public int getClicksCount() {
+        return boardModel.getClicks();
     }
 }

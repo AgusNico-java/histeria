@@ -10,5 +10,6 @@ public class Texts {
 
     // Win View texts
     public static final String WIN = "¡Ganaste!";
+    public static final String CLICKS_COUNT = "Clicks: ";
     public static final String START = "Empezar";
 }
