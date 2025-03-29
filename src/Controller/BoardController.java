@@ -1,12 +1,14 @@
 package Controller;
 
-import Model.Board;
-import java.awt.*;
+import Model.BoardModel;
+import Model.values.Level;
+
+import java.awt.Color;
 
 public class BoardController {
-    private final Board boardModel;
+    private BoardModel boardModel;
 
-    public BoardController(Board boardModel) {
+    public BoardController(BoardModel boardModel) {
         this.boardModel = boardModel;
     }
 
@@ -14,12 +16,38 @@ public class BoardController {
         return boardModel.getGridCells();
     }
 
+    public void startGame(String levelText) {
+        Level level = Level.fromString(levelText);
+        boardModel.initBoard(level.getGridSize());
+    }
+
     public void updateBoardOnClick(int row, int column){
-        System.out.println(row + " " + column);
+        click();
         boardModel.generateCellColor(row, column);
         Boolean cleanCellColor = boardModel.updateColorsAroundCell(row, column);
         if (cleanCellColor) {
             boardModel.updateCellColor(row, column, Color.GRAY);
         }
+    }
+
+    private void click(){
+        boardModel.click();
+        System.out.println(boardModel.getClicks());
+    }
+
+    public Color getCellColor(int i, int j) {
+        return boardModel.getCellColor(i, j);
+    }
+
+    public void replay() {
+        boardModel.replay();
+    }
+
+    public String[] getAvailableLevels() {
+        return Level.getLabels();
+    }
+
+    public int getClicksCount() {
+        return boardModel.getClicks();
     }
 }

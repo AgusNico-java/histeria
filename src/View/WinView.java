@@ -1,40 +1,64 @@
 package View;
 
-import Observer.Observer;
+import Controller.BoardController;
+import Model.values.EventType;
+import Utils.Texts;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class WinView extends JFrame implements Observer {
+public class WinView extends BaseView {
+    private BoardController boardController;
     private JLabel winMessage;
+    private JLabel clicksCountMessage;
     private JButton startButton;
+    private int clicks = 0;
 
-    public WinView() {
 
-        setTitle("Hysteria");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500, 400);
-        setLocationRelativeTo(null);
-        getContentPane().setLayout(new GridBagLayout());
+    public WinView(BoardController boardController) {
+        this.boardController = boardController;
+        setLayout(new GridBagLayout());
+        initComponents();
+        initializeListeners();
+    }
 
+    private void initializeListeners() {
+        startButton.addActionListener(e -> {
+            boardController.replay();
+            setVisible(false);
+        });
+    }
+
+    private void initComponents(){
         GridBagConstraints gbc = new GridBagConstraints();
 
-        winMessage = new JLabel("¡Ganaste!");
+        winMessage = new JLabel(Texts.WIN);
         winMessage.setFont(new Font("Arial", Font.BOLD, 36));
         winMessage.setBorder(BorderFactory.createEmptyBorder(10, 30, 70, 30));
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        getContentPane().add(winMessage, gbc);
+        add(winMessage, gbc);
 
-        startButton = new JButton("Empezar");
+        clicksCountMessage = new JLabel();
+        clicksCountMessage.setFont(new Font("Arial", Font.PLAIN, 17));
+        clicksCountMessage.setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.CENTER;
-        getContentPane().add(startButton, gbc);
+        add(clicksCountMessage, gbc);
 
-        //TODO: Descomentar para probar, esto lo hace el método notificar
-        //setVisible(true);
+        startButton = new JButton(Texts.START);
+        gbc.gridy = 2;
+        gbc.fill = GridBagConstraints.CENTER;
+        add(startButton, gbc);
     }
-    @Override
-    public void notificar() {
-        setVisible(true);
+
+    public void update(String eventType) {
+        switch (EventType.valueOf(eventType)) {
+            case WIN -> {
+                setVisible(true);
+                clicks = boardController.getClicksCount();
+                clicksCountMessage.setText(Texts.CLICKS_COUNT + clicks);
+            }
+        }
     }
 }
