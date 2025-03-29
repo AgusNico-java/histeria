@@ -1,9 +1,11 @@
 package Controller;
 
 import Model.BoardModel;
+import Model.values.EventType;
 import Model.values.Level;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.event.ActionListener;
 
 public class BoardController {
     private BoardModel boardModel;
@@ -27,7 +29,6 @@ public class BoardController {
 
     public void updateBoardOnClick(int row, int column){
         click();
-        System.out.println(row + " " + column);
         boardModel.generateCellColor(row, column);
         Boolean cleanCellColor = boardModel.updateColorsAroundCell(row, column);
         if (cleanCellColor) {
@@ -42,5 +43,9 @@ public class BoardController {
 
     public Color getCellColor(int i, int j) {
         return boardModel.getCellColor(i, j);
+    }
+
+    public void replay() {
+        boardModel.replay();
     }
 }

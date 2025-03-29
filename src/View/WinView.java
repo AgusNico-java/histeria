@@ -1,22 +1,31 @@
 package View;
 
+import Controller.BoardController;
 import Model.values.EventType;
 import Observer.Observer;
 import javax.swing.*;
 import java.awt.*;
 
-public class WinView extends JFrame implements Observer {
+public class WinView extends BaseView {
     private JLabel winMessage;
     private JButton startButton;
+    private BoardController boardController;
 
-    public WinView() {
+    public WinView(BoardController boardController) {
+        this.boardController = boardController;
+        setLayout(new GridBagLayout());
+        initComponents();
+        initializeListeners();
+    }
 
-        setTitle("Hysteria Game");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500, 400);
-        setLocationRelativeTo(null);
-        getContentPane().setLayout(new GridBagLayout());
+    private void initializeListeners() {
+        startButton.addActionListener(e -> {
+            boardController.replay();
+            setVisible(false);
+        });
+    }
 
+    private void initComponents(){
         GridBagConstraints gbc = new GridBagConstraints();
 
         winMessage = new JLabel("¡Ganaste!");
@@ -24,18 +33,17 @@ public class WinView extends JFrame implements Observer {
         winMessage.setBorder(BorderFactory.createEmptyBorder(10, 30, 70, 30));
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        getContentPane().add(winMessage, gbc);
+        add(winMessage, gbc);
 
         startButton = new JButton("Empezar");
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.CENTER;
-        getContentPane().add(startButton, gbc);
+        add(startButton, gbc);
     }
 
-    @Override
     public void update(String eventType) {
-        if (eventType.equals(EventType.WIN.name())){
-            setVisible(true);
+        switch (EventType.valueOf(eventType)) {
+            case WIN -> setVisible(true);
         }
     }
 }

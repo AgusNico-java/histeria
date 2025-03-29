@@ -5,10 +5,9 @@ import View.BoardView;
 import View.LevelView;
 import View.WinView;
 
-import javax.swing.*;
+import javax.swing.SwingUtilities;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
@@ -17,13 +16,14 @@ public class Main {
 
             LevelView levelView = new LevelView(boardController);
             levelView.setVisible(true);
+            boardModel.eventManager.subscribe(EventType.REPLAY.name(), levelView);
 
             BoardView boardView = new BoardView(boardController);
             boardModel.eventManager.subscribe(EventType.WIN.name(), boardView);
             boardModel.eventManager.subscribe(EventType.UPDATE_BOARD.name(), boardView);
             boardModel.eventManager.subscribe(EventType.START.name(), boardView);
 
-            WinView winView = new WinView();
+            WinView winView = new WinView(boardController);
             boardModel.eventManager.subscribe(EventType.WIN.name(), winView);
         });
     }

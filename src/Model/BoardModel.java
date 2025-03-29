@@ -3,7 +3,7 @@ package Model;
 import Model.values.EventType;
 import Observer.EventManager;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.Random;
 
 public class BoardModel {
@@ -57,7 +57,6 @@ public class BoardModel {
         if (cell.getColor().equals(Color.GRAY)){
             this.totalGrayCells -= 1;
         }
-        System.out.println("Total gray cells: " + this.totalGrayCells);
         cell.setColor(color);
         checkWin();
         eventManager.notify(EventType.UPDATE_BOARD.name());
@@ -66,7 +65,6 @@ public class BoardModel {
     public void generateCellColor(int row, int column) {
         Color newColor = possibleColors[new Random().nextInt(6)];
         updateCellColor(row,column, newColor);
-        System.out.println("Color selected: " + newColor);
     }
 
     private Boolean updateColor(Cell cell, int row, int column){
@@ -99,5 +97,9 @@ public class BoardModel {
 
     public int getClicks() {
         return this.clicks;
+    }
+
+    public void replay() {
+        this.eventManager.notify(EventType.REPLAY.name());
     }
 }
