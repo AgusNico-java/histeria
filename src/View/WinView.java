@@ -3,6 +3,8 @@ package View;
 import Controller.BoardController;
 import Model.values.EventType;
 import Observer.Observer;
+import Utils.Texts;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -28,14 +30,14 @@ public class WinView extends BaseView {
     private void initComponents(){
         GridBagConstraints gbc = new GridBagConstraints();
 
-        winMessage = new JLabel("¡Ganaste!");
+        winMessage = new JLabel(Texts.WIN);
         winMessage.setFont(new Font("Arial", Font.BOLD, 36));
         winMessage.setBorder(BorderFactory.createEmptyBorder(10, 30, 70, 30));
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         add(winMessage, gbc);
 
-        startButton = new JButton("Empezar");
+        startButton = new JButton(Texts.START);
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.CENTER;
         add(startButton, gbc);

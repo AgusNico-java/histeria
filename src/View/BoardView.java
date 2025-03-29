@@ -32,7 +32,7 @@ public class BoardView extends BaseView {
                 JButton cell = new JButton();
                 cell.setOpaque(true);
                 cell.setBorderPainted(true);
-                cell.setBackground(Color.WHITE); // Default
+                cell.setBackground(Color.WHITE);
                 initCellListener(cell, i, j);
                 gridButtons[i][j] = cell;
                 gridPanel.add(cell);

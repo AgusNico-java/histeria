@@ -100,5 +100,6 @@ public class BoardModel {
 
     public void replay() {
         this.eventManager.notify(EventType.REPLAY.name());
+        this.clicks = 0;
     }
 }

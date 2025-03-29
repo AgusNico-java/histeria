@@ -3,6 +3,7 @@ package Controller;
 import Model.BoardModel;
 import Model.values.Level;
 import java.awt.Color;
+import java.util.Arrays;
 
 public class BoardController {
     private BoardModel boardModel;
@@ -44,5 +45,9 @@ public class BoardController {
 
     public void replay() {
         boardModel.replay();
+    }
+
+    public String[] getAvailableLevels() {
+        return Level.getLabels();
     }
 }

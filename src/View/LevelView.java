@@ -3,8 +3,17 @@ package View;
 import Controller.BoardController;
 import Model.values.EventType;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.Font;
+
+import Utils.Texts;
 
 public class LevelView extends BaseView {
     private JLabel welcomeMessage;
@@ -22,8 +31,8 @@ public class LevelView extends BaseView {
 
     private void initializeListeners() {
         startGameButton.addActionListener(e -> {
-            String nivelSeleccionado = levelSelection.getSelectedItem().toString();
-            boardController.startGame(nivelSeleccionado);
+            String selectedLevel = levelSelection.getSelectedItem().toString();
+            boardController.startGame(selectedLevel);
             setVisible(false);
         });
     }
@@ -36,7 +45,7 @@ public class LevelView extends BaseView {
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        welcomeMessage = new JLabel("Bienvenido a Histeria!", SwingConstants.CENTER);
+        welcomeMessage = new JLabel(Texts.WELCOME, SwingConstants.CENTER);
         welcomeMessage.setFont(new Font("Arial", Font.BOLD, 32));
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -45,28 +54,27 @@ public class LevelView extends BaseView {
 
         gbc.gridwidth = 1;
 
-        selectionMessage = new JLabel("Seleccione un nivel:");
+        selectionMessage = new JLabel(Texts.LEVEL_SELECTION);
         selectionMessage.setFont(new Font("Arial", Font.PLAIN, 18));
 
         gbc.gridx = 0;
         gbc.gridy = 1;
         add(selectionMessage, gbc);
 
-        levelSelection = new JComboBox<>(new String[]{"Facil", "Medio", "Dificil"});
+        levelSelection = new JComboBox<>(boardController.getAvailableLevels());
         levelSelection.setFont(new Font("Arial", Font.PLAIN, 16));
         gbc.insets = new Insets(20, 0, 20, 40);
         gbc.gridx = 1;
         gbc.gridy = 1;
         add(levelSelection, gbc);
 
-        startGameButton = new JButton("Jugar");
+        startGameButton = new JButton(Texts.PLAY);
         startGameButton.setFont(new Font("Arial", Font.BOLD, 16));
         gbc.insets = new Insets(20, 40, 20, 40);
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 2;
         add(startGameButton, gbc);
-
     }
 
     @Override

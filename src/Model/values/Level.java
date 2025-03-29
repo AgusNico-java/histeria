@@ -1,5 +1,7 @@
 package Model.values;
 
+import java.util.Arrays;
+
 public enum Level {
     FACIL("Facil"),
     MEDIO("Medio"),
@@ -22,6 +24,12 @@ public enum Level {
             }
         }
         throw new IllegalArgumentException("Nivel inválido: " + text);
+    }
+
+    public static String[] getLabels() {
+        return Arrays.stream(values())
+                .map(Level::getValue)
+                .toArray(String[]::new);
     }
 
     @Override
