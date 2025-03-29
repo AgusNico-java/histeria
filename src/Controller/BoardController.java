@@ -1,11 +1,8 @@
 package Controller;
 
 import Model.BoardModel;
-import Model.values.EventType;
 import Model.values.Level;
-
 import java.awt.Color;
-import java.awt.event.ActionListener;
 
 public class BoardController {
     private BoardModel boardModel;

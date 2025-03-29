@@ -23,7 +23,6 @@ public class BoardModel {
         this.gridCells = gridCells;
         grid = new Cell[gridCells][gridCells];
 
-        //Inicializa los valores de los atributos fila y columna de cada celda
         for (int i = 0; i < gridCells; i++) {
             for (int j = 0; j < gridCells; j++) {
                 grid[i][j] = new Cell(i, j);
