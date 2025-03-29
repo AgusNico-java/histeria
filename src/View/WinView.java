@@ -1,5 +1,6 @@
 package View;
 
+import Model.values.EventType;
 import Observer.Observer;
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +11,7 @@ public class WinView extends JFrame implements Observer {
 
     public WinView() {
 
-        setTitle("Hysteria");
+        setTitle("Hysteria Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 400);
         setLocationRelativeTo(null);
@@ -29,12 +30,12 @@ public class WinView extends JFrame implements Observer {
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.CENTER;
         getContentPane().add(startButton, gbc);
-
-        //TODO: Descomentar para probar, esto lo hace el método notificar
-        //setVisible(true);
     }
+
     @Override
-    public void notificar() {
-        setVisible(true);
+    public void update(String eventType) {
+        if (eventType.equals(EventType.WIN.name())){
+            setVisible(true);
+        }
     }
 }

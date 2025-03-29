@@ -2,5 +2,5 @@ package Observer;
 
 public interface Observer {
 
-    void notificar();
+    void update(String eventType);
 }

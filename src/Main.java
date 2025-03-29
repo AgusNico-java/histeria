@@ -1,7 +1,6 @@
 import Controller.BoardController;
-import Controller.LevelController;
 import Model.BoardModel;
-import Model.LevelModel;
+import Model.values.EventType;
 import View.BoardView;
 import View.LevelView;
 import View.WinView;
@@ -13,38 +12,19 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
+            BoardModel boardModel = new BoardModel();
+            BoardController boardController = new BoardController(boardModel);
 
-            //######################### SHOW LEVELS ###################
-            // 1. Crear el modelo
-            LevelModel levelModel = new LevelModel();
-            // 2. Crear el controlador
-            LevelController levelController = new LevelController(levelModel);
-            // 3. Crear la vista, inyectando el controlador
-            LevelView levelView = new LevelView(levelController);
-            // 4. Registrar la vista como observer en el modelo
-            levelModel.addObserver(levelView);
-            // 5. Mostrar la ventana
+            LevelView levelView = new LevelView(boardController);
             levelView.setVisible(true);
 
-            //TODO: CAPTURAR LA DIFICULTAD -> QUE CANTIDAD DE CELDAS HAY
-
-
-
-            //######################### SHOW BOARD ###################
-
-            // 1. Crear el modelo
-            BoardModel boardModel = new BoardModel(6);
-            // 2. Crear el controlador
-            BoardController boardController = new BoardController(boardModel);
-            // 3. Crear la vista, inyectando el controlador
             BoardView boardView = new BoardView(boardController);
-            // 4. Registrar la vista como observer en el modelo
-            boardModel.addObserver(boardView);
-            // 5. Mostrar la ventana
-            boardView.setVisible(true);
+            boardModel.eventManager.subscribe(EventType.WIN.name(), boardView);
+            boardModel.eventManager.subscribe(EventType.UPDATE_BOARD.name(), boardView);
+            boardModel.eventManager.subscribe(EventType.START.name(), boardView);
 
             WinView winView = new WinView();
-            boardModel.addObserver(winView);
+            boardModel.eventManager.subscribe(EventType.WIN.name(), winView);
         });
     }
 }
