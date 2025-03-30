@@ -1,6 +1,6 @@
 import Controller.BoardController;
 import Model.BoardModel;
-import Model.values.EventType;
+import Model.bussinessValues.EventType;
 import View.BoardView;
 import View.LevelView;
 import View.WinView;

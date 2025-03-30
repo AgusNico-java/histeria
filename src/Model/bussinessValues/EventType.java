@@ -1,4 +1,4 @@
-package Model.values;
+package Model.bussinessValues;
 
 public enum EventType {
     WIN,

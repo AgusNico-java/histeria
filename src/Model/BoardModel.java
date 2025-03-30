@@ -1,16 +1,15 @@
 package Model;
 
-import Model.values.EventType;
+import Model.bussinessValues.EventType;
 import Observer.EventManager;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.Random;
 
 public class BoardModel {
     private Cell[][] grid;
     private int gridCells = 5;
-    private Color[] possibleColors = {Color.RED, Color.BLUE, Color.GREEN,
-            Color.YELLOW, Color.CYAN, Color.ORANGE};
+    private final GameColor[] possibleColors = GameColor.gameColorsOnly();
     public EventManager eventManager;
     private int totalGrayCells;
     private int clicks = 0;
@@ -37,39 +36,54 @@ public class BoardModel {
         return gridCells;
     }
 
-    public Boolean updateColorsAroundCell(int row, int column){
+    public boolean updateColorsAroundCell(int row, int column) {
         Cell cell = getCell(row, column);
-        Boolean updateUp = updateColor(cell, cell.getRow() - 1, cell.getColumn());
-        Boolean updateDown = updateColor(cell, cell.getRow() + 1, cell.getColumn());
-        Boolean updateLeft = updateColor(cell, cell.getRow(), cell.getColumn() - 1);
-        Boolean updateRight = updateColor(cell, cell.getRow() , cell.getColumn() + 1);
+        int[][] directions = {
+                {-1, 0},
+                {1, 0},
+                {0, -1},
+                {0, 1}
+        };
 
-        return updateUp || updateDown || updateLeft || updateRight;
+        boolean updated = false;
+
+        for (int[] dir : directions) {
+            int newRow = row + dir[0];
+            int newCol = column + dir[1];
+            if (updateColor(cell, newRow, newCol)) {
+                updated = true;
+            }
+        }
+
+        return updated;
     }
 
-    public void updateCellColor(int row, int column, Color color){
+    public void updateCellColor(int row, int column, GameColor color){
         Cell cell = getCell(row, column);
-
-        if (color.equals(Color.GRAY)) {
-            this.totalGrayCells += 1;
-        }
-        if (cell.getColor().equals(Color.GRAY)){
-            this.totalGrayCells -= 1;
-        }
+        updateTotalGrays(color, cell);
         cell.setColor(color);
         checkWin();
         eventManager.notify(EventType.UPDATE_BOARD.name());
     }
 
+    private  void updateTotalGrays(GameColor color, Cell cell) {
+        if (color.equals(GameColor.BASE_GRAY)) {
+            this.totalGrayCells += 1;
+        }
+        if (cell.getColor().equals(GameColor.BASE_GRAY.getAwtColor())){
+            this.totalGrayCells -= 1;
+        }
+    }
+
     public void generateCellColor(int row, int column) {
-        Color newColor = possibleColors[new Random().nextInt(6)];
+        GameColor newColor = possibleColors[new Random().nextInt(6)];
         updateCellColor(row,column, newColor);
     }
 
     private Boolean updateColor(Cell cell, int row, int column){
         if (row >= 0 && row < this.gridCells && column >= 0 && column < this.gridCells) {
             if (cell.compareColor(grid[row][column])){
-                updateCellColor(row, column, Color.GRAY);
+                updateCellColor(row, column, GameColor.BASE_GRAY);
                 return true;
             }
         }

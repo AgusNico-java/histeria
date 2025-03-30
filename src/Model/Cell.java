@@ -1,6 +1,6 @@
 package Model;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class Cell {
     private Color color;
@@ -9,7 +9,7 @@ public class Cell {
 
     public Cell(int row, int column) {
         //TODO: VALIDAR QUE NO SE PASE MENOR A CERO
-        this.color = Color.gray;
+        this.color = GameColor.BASE_GRAY.getAwtColor();
         this.row = row;
         this.column = column;
     }
@@ -18,8 +18,8 @@ public class Cell {
         return color;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public void setColor(GameColor color) {
+        this.color = color.getAwtColor();
     }
 
     public int getRow() {
