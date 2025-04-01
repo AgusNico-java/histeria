@@ -1,7 +1,7 @@
 package View;
 
 import Controller.BoardController;
-import Model.values.EventType;
+import Model.bussinessValues.EventType;
 import Utils.Texts;
 
 import javax.swing.*;

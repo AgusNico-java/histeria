@@ -1,9 +1,11 @@
 package Controller;
 
 import Model.BoardModel;
-import Model.values.Level;
+import Model.bussinessValues.Level;
+import Model.GameColor;
 
-import java.awt.Color;
+import java.awt.*;
+
 
 public class BoardController {
     private BoardModel boardModel;
@@ -26,7 +28,7 @@ public class BoardController {
         boardModel.generateCellColor(row, column);
         Boolean cleanCellColor = boardModel.updateColorsAroundCell(row, column);
         if (cleanCellColor) {
-            boardModel.updateCellColor(row, column, Color.GRAY);
+            boardModel.updateCellColor(row, column, GameColor.BASE_GRAY);
         }
     }
 

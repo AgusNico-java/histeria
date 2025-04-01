@@ -1,9 +1,7 @@
 package View;
 
 import Controller.BoardController;
-import Model.BoardModel;
-import Model.values.EventType;
-import Observer.Observer;
+import Model.bussinessValues.EventType;
 
 import javax.swing.*;
 import java.awt.*;

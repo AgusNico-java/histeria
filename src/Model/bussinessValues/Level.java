@@ -1,4 +1,4 @@
-package Model.values;
+package Model.bussinessValues;
 
 import Utils.GameConfig;
 

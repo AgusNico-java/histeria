@@ -1,7 +1,7 @@
 package View;
 
 import Controller.BoardController;
-import Model.values.EventType;
+import Model.bussinessValues.EventType;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
