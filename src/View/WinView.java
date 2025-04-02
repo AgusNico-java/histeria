@@ -49,7 +49,7 @@ public class WinView extends BaseView {
         gbc.fill = GridBagConstraints.CENTER;
         add(clicksCountMessage, gbc);
 
-        startButton = startButton = new CustomButton(Texts.START);
+        startButton = new CustomButton(Texts.START);
 
         gbc.gridy = 2;
         gbc.fill = GridBagConstraints.CENTER;

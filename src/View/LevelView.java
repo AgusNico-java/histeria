@@ -6,7 +6,6 @@ import Model.bussinessValues.EventType;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
-import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
 
