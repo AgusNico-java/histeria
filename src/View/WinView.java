@@ -5,6 +5,7 @@ import Model.values.EventType;
 import Utils.Texts;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class WinView extends BaseView {
@@ -33,7 +34,8 @@ public class WinView extends BaseView {
         GridBagConstraints gbc = new GridBagConstraints();
 
         winMessage = new JLabel(Texts.WIN);
-        winMessage.setFont(new Font("Arial", Font.BOLD, 36));
+        winMessage.setFont(new Font("Arial", Font.BOLD, 32));
+        winMessage.setForeground(new Color(33, 150, 243));
         winMessage.setBorder(BorderFactory.createEmptyBorder(10, 30, 70, 30));
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -47,6 +49,13 @@ public class WinView extends BaseView {
         add(clicksCountMessage, gbc);
 
         startButton = new JButton(Texts.START);
+        startButton.setFont(new Font("Arial", Font.BOLD, 16));
+        startButton.setBackground(new Color(33, 150, 243)); // Azul vibrante
+        startButton.setForeground(Color.WHITE); // Texto blanco
+        startButton.setFocusPainted(false);
+        startButton.setBorder(new EmptyBorder(10, 20, 10, 20)); // Padding interno
+        startButton.setPreferredSize(new Dimension(120, 45));
+
         gbc.gridy = 2;
         gbc.fill = GridBagConstraints.CENTER;
         add(startButton, gbc);
