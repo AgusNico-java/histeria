@@ -6,12 +6,13 @@ import Model.bussinessValues.EventType;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
 
 import Utils.Texts;
+import View.Components.CustomButton;
+import View.Components.CustomTitleLabel;
 
 public class LevelView extends BaseView {
     private JLabel welcomeMessage;
@@ -43,9 +44,7 @@ public class LevelView extends BaseView {
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        welcomeMessage = new JLabel(Texts.WELCOME, SwingConstants.CENTER);
-        welcomeMessage.setFont(new Font("Arial", Font.BOLD, 32));
-        welcomeMessage.setForeground(new Color(33, 150, 243));
+        welcomeMessage = new CustomTitleLabel(Texts.WELCOME);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
@@ -66,14 +65,7 @@ public class LevelView extends BaseView {
         gbc.gridwidth = 1;
         add(levelSelection, gbc);
 
-        startGameButton = new JButton(Texts.PLAY);
-        startGameButton.setFont(new Font("Arial", Font.BOLD, 16));
-        startGameButton.setBackground(new Color(33, 150, 243)); // Azul vibrante
-        startGameButton.setForeground(Color.WHITE); // Texto blanco
-        startGameButton.setFocusPainted(false);
-        startGameButton.setBorder(new EmptyBorder(10, 20, 10, 20)); // Padding interno
-        startGameButton.setPreferredSize(new Dimension(120, 45));
-
+        startGameButton = new CustomButton(Texts.PLAY);
 
         gbc.insets = new Insets(20, 40, 20, 40);
         gbc.gridx = 0;

@@ -3,6 +3,8 @@ package View;
 import Controller.BoardController;
 import Model.bussinessValues.EventType;
 import Utils.Texts;
+import View.Components.CustomButton;
+import View.Components.CustomTitleLabel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -33,12 +35,11 @@ public class WinView extends BaseView {
     private void initComponents(){
         GridBagConstraints gbc = new GridBagConstraints();
 
-        winMessage = new JLabel(Texts.WIN);
-        winMessage.setFont(new Font("Arial", Font.BOLD, 32));
-        winMessage.setForeground(new Color(33, 150, 243));
-        winMessage.setBorder(BorderFactory.createEmptyBorder(10, 30, 70, 30));
+        winMessage = new CustomTitleLabel(Texts.WIN);
+        gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridwidth = 2;
+        // gbc.fill = GridBagConstraints.HORIZONTAL;
         add(winMessage, gbc);
 
         clicksCountMessage = new JLabel();
@@ -48,13 +49,7 @@ public class WinView extends BaseView {
         gbc.fill = GridBagConstraints.CENTER;
         add(clicksCountMessage, gbc);
 
-        startButton = new JButton(Texts.START);
-        startButton.setFont(new Font("Arial", Font.BOLD, 16));
-        startButton.setBackground(new Color(33, 150, 243)); // Azul vibrante
-        startButton.setForeground(Color.WHITE); // Texto blanco
-        startButton.setFocusPainted(false);
-        startButton.setBorder(new EmptyBorder(10, 20, 10, 20)); // Padding interno
-        startButton.setPreferredSize(new Dimension(120, 45));
+        startButton = startButton = new CustomButton(Texts.START);
 
         gbc.gridy = 2;
         gbc.fill = GridBagConstraints.CENTER;
