@@ -1,13 +1,14 @@
 package Model;
 
 import Model.bussinessValues.EventType;
+import Model.bussinessValues.GameColor;
 import Observer.EventManager;
 
 import java.awt.*;
 import java.util.Random;
 
 public class BoardModel {
-    private Cell[][] grid;
+    private CellModel[][] grid;
     private int gridCells = 5;
     private final GameColor[] possibleColors = GameColor.gameColorsOnly();
     public EventManager eventManager;
@@ -20,11 +21,11 @@ public class BoardModel {
 
     public void initBoard(int gridCells) {
         this.gridCells = gridCells;
-        grid = new Cell[gridCells][gridCells];
+        grid = new CellModel[gridCells][gridCells];
 
         for (int i = 0; i < gridCells; i++) {
             for (int j = 0; j < gridCells; j++) {
-                grid[i][j] = new Cell(i, j);
+                grid[i][j] = new CellModel(i, j);
             }
         }
 
@@ -37,7 +38,7 @@ public class BoardModel {
     }
 
     public boolean updateColorsAroundCell(int row, int column) {
-        Cell cell = getCell(row, column);
+        CellModel cell = getCell(row, column);
         int[][] directions = {
                 {-1, 0},
                 {1, 0},
@@ -59,14 +60,14 @@ public class BoardModel {
     }
 
     public void updateCellColor(int row, int column, GameColor color){
-        Cell cell = getCell(row, column);
+        CellModel cell = getCell(row, column);
         updateTotalGrays(color, cell);
         cell.setColor(color);
         checkWin();
         eventManager.notify(EventType.UPDATE_BOARD.name());
     }
 
-    private  void updateTotalGrays(GameColor color, Cell cell) {
+    private  void updateTotalGrays(GameColor color, CellModel cell) {
         if (color.equals(GameColor.BASE_GRAY)) {
             this.totalGrayCells += 1;
         }
@@ -80,7 +81,7 @@ public class BoardModel {
         updateCellColor(row,column, newColor);
     }
 
-    private Boolean updateColor(Cell cell, int row, int column){
+    private Boolean updateColor(CellModel cell, int row, int column){
         if (row >= 0 && row < this.gridCells && column >= 0 && column < this.gridCells) {
             if (cell.compareColor(grid[row][column])){
                 updateCellColor(row, column, GameColor.BASE_GRAY);
@@ -90,7 +91,7 @@ public class BoardModel {
         return false;
     }
 
-    private Cell getCell(int row, int column) {
+    private CellModel getCell(int row, int column) {
         return grid[row][column];
     }
     

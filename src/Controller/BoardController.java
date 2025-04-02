@@ -2,7 +2,7 @@ package Controller;
 
 import Model.BoardModel;
 import Model.bussinessValues.Level;
-import Model.GameColor;
+import Model.bussinessValues.GameColor;
 
 import java.awt.*;
 
@@ -34,7 +34,6 @@ public class BoardController {
 
     private void click(){
         boardModel.click();
-        System.out.println(boardModel.getClicks());
     }
 
     public Color getCellColor(int i, int j) {

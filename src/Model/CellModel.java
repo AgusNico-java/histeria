@@ -1,13 +1,15 @@
 package Model;
 
+import Model.bussinessValues.GameColor;
+
 import java.awt.Color;
 
-public class Cell {
+public class CellModel {
     private Color color;
     private int row;
     private int column;
 
-    public Cell(int row, int column) {
+    public CellModel(int row, int column) {
         //TODO: VALIDAR QUE NO SE PASE MENOR A CERO
         this.color = GameColor.BASE_GRAY.getAwtColor();
         this.row = row;
@@ -30,7 +32,7 @@ public class Cell {
         return this.column;
     }
 
-    public boolean compareColor(Cell cell) {
+    public boolean compareColor(CellModel cell) {
         return this.color.equals(cell.color);
     }
 
